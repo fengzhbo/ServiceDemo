@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ProtoBuf;
+using ServiceDemo.Model.Reponse.Atom;
 
 namespace ServiceDemo.Model.Reponse.Aggregate
 {
@@ -14,7 +15,7 @@ namespace ServiceDemo.Model.Reponse.Aggregate
         public Int32 DealerID { get; set; }
 
         [ProtoMember(2)]
-        public Int32 CsID { get; set; }
+        public CarSerial CsInfo  { get; set; }
 
         [ProtoMember(3)]
         public List<PriceByCarDealer> PriceList { get; set; }
