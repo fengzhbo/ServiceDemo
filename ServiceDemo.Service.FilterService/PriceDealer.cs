@@ -15,6 +15,24 @@ namespace ServiceDemo.Service.FilterService
 {
     public class PriceDealer : IPrice
     {
+        ICarAtom _carDal;
+        IPriceAtom _priceDal;
+        IPriceFilter _priceFilterDal;
+        ICarSerialAtom _carSerialDal;
+
+        public PriceDealer(ICarAtom carDal, IPriceAtom priceDal, IPriceFilter priceFilterDal,ICarSerialAtom carSerialDal)
+        {
+
+            _carDal = carDal;
+
+            _priceDal = priceDal;
+
+            _priceFilterDal = priceFilterDal;
+
+            _carSerialDal = carSerialDal;
+
+        }
+
 
         public Model.Result<List<PriceByCsDealer>> GetPriceListByDealerCs(RequestListArgs<Model.Request.PriceByCsDealerArgs> args)
         {
@@ -27,7 +45,7 @@ namespace ServiceDemo.Service.FilterService
 
 
             #region 筛选
-            var priceFilter = DAL.DBAccess.DbFactory.GetPriceFilter().FilterPriceCsDealer(args);
+            var priceFilter = _priceFilterDal.FilterPriceCsDealer(args);
             #endregion
 
             if (priceFilter.Count() > 0)
@@ -50,11 +68,11 @@ namespace ServiceDemo.Service.FilterService
 
 
                 #region 取原子数据
-                var listPrice = DAL.DBAccess.DbFactory.GetPriceAtom().GetPriceListByIDs(priceIDs);
+                var listPrice = _priceDal.GetPriceListByIDs(priceIDs);
 
-                var listCar = DAL.DBAccess.DbFactory.GetCarAtom().GetCarListByIDs(carIDs);
+                var listCar = _carDal.GetCarListByIDs(carIDs);
 
-                var listCs = DAL.DBAccess.DbFactory.GetCarSerialAtom().GetCsListByIDs(csIDs);
+                var listCs = _carSerialDal.GetCsListByIDs(csIDs);
                 #endregion
 
 
