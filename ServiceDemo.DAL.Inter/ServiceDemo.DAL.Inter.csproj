@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="ICar.cs" />
     <Compile Include="ICarSerial.cs" />
+    <Compile Include="IDealer.cs" />
     <Compile Include="IPrice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
